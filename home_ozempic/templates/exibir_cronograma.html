@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'home_ozempic/static.css' %}">
+    <title>Resultado do Cronograma</title>
+</head>
+<body>
+    <div class="resultado-container">
+
+     <h1>Resultado do Cronograma</h1>
+
+     {% if nivel_saude %}
+         <p><strong>Nível de Saúde:</strong> {{ nivel_saude }}</p>
+     {% endif %}
+
+     {% if dose_inicial %}
+        <p><strong>Dose Inicial Sugerida:</strong> {{ dose_inicial }} mg</p>
+     {% endif %}
+
+     {% if num_semanas %}
+        <p><strong>Número de Semanas Sugerido:</strong> {{ num_semanas }}</p>
+     {% endif %}
+    
+     {% if cronograma %}
+        <h2>Cronograma Semanal:</h2>
+        {% if cronograma|length > 0 %}
+            <ul>
+                {% for dose in cronograma %}
+                    <li>{{ dose }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhum cronograma gerado.</p>
+        {% endif %}
+     {% endif %}
+
+     {% if form and form.errors %}
+        <h2>Erros no Formulário:</h2>
+        <ul>
+            {% for field, errors in form.errors.items %}
+                <li><strong>{{ form.fields.field.label }}:</strong>
+                    <ul>
+                        {% for error in errors %}
+                            <li style="color: red;">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+     {% endif %}
+    </div>
+    <p><a href="{% url 'pagina_inicial' %}">Voltar ao Formulário</a></p>
+</body>
+</html>
+

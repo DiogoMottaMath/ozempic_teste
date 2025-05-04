@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'home_ozempic/static.css' %}">
+    <title>Ozempic Calculator - Your Personal Dosage Tool</title>
+    <meta name="description" content="A simple calculator for Ozempic users to determine personalized information about their treatment" />
+    <meta name="author" content="OzempicCalc" />
+
+    <meta property="og:title" content="Ozempic Calculator - Your Personal Dosage Tool" />
+    <meta property="og:description" content="A simple calculator for Ozempic users to determine personalized information about their treatment" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <link rel="stylesheet" href="styles.css">
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <div class="logo">
+          <div class="logo-icon">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <span class="logo-text">Ozempic<span class="logo-highlight">Calc</span></span>
+        </div>
+      </header>
+      
+      <!-- Main Content -->
+      <main>
+        <div class="hero">
+          <h1>Simplifique sua jornada com o OZEMPIC</h1>
+          <p class="subtitle">
+            Calcule suas informações de dosagem personalizadas de forma rápida e 
+            fácil com nossa ferramenta simples e fácil de usar.
+          </p>
+          
+          <!-- Calculator Button -->
+          <div class="button-container">
+            <form method="POST">
+              {% csrf_token %}
+              <button id="calculator-button" class="calculator-button" type="submit">
+                <span>Calcular minha Dose</span>
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <!-- Features -->
+        <div class="features">
+          <div class="feature-card">
+            <h3>Cálculo Fácil da Dose
+            </h3>
+            <p>Cálculos simples e precisos com base nas suas necessidades específicas.
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3>Calcule seu IMC</h3>
+            <p>Monitore seu índice de gordura corporal com facilidade.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Quanto vai custar?</h3>
+            <p>Saiba o preço estimado do tratamento antes de começar.</p>
+          </div>
+        </div>
+      </main>
+      
+      <!-- Footer -->
+      <footer>
+        <p>© <span id="current-year"></span> OzempicCalc. This is an educational tool and not a substitute for medical advice.</p>
+        <p>Always consult with your healthcare provider for medical decisions.</p>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById('current-year').textContent = new Date().getFullYear();
+      document.getElementById('calculator-button').addEventListener('click', function() {
+        console.log('Calculator button clicked');
+      });
+      
+      // Button hover effect
+      const button = document.getElementById('calculator-button');
+      button.addEventListener('mouseenter', function() {
+        this.classList.add('hovered');
+      });
+      button.addEventListener('mouseleave', function() {
+        this.classList.remove('hovered');
+      });
+    </script>
+  </body>
+</html>
