@@ -15,6 +15,9 @@
         <form method="post">
          {% csrf_token %}
          <div class="form-group">
+            {{ form.nome.label_tag }} {{ form.nome }} {{ form.nome.errors }}
+         </div>
+         <div class="form-group">
             {{ form.peso.label_tag }} {{ form.peso }} {{ form.peso.errors }}
          </div>
          <div class="form-group">

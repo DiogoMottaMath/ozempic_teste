@@ -13,30 +13,55 @@
 
      <h1>Resultado do Cronograma</h1>
 
-     {% if nivel_saude %}
-         <p><strong>Nível de Saúde:</strong> {{ nivel_saude }}</p>
+     {# Exibindo a mensagem da IA, se existir #}
+     {% if mensagem_ia %}
+         <div class="mensagem-ia">
+             <h3>Resultado e Mensagem Personalizada:</h3>
+             <p>{{ mensagem_ia }}</p>
+         </div>
      {% endif %}
 
-     {% if dose_inicial %}
-        <p><strong>Dose Inicial Sugerida:</strong> {{ dose_inicial }} mg</p>
+     {# Exibindo erro ao gerar mensagem da IA, se existir #}
+     {% if erro_mensagem_ia %}
+         <div class="erro">
+             <p>{{ erro_mensagem_ia }}</p>
+         </div>
      {% endif %}
 
-     {% if num_semanas %}
-        <p><strong>Número de Semanas Sugerido:</strong> {{ num_semanas }}</p>
-     {% endif %}
-    
-     {% if cronograma %}
-        <h2>Cronograma Semanal:</h2>
-        {% if cronograma|length > 0 %}
-            <ul>
-                {% for dose in cronograma %}
-                    <li>{{ dose }}</li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>Nenhum cronograma gerado.</p>
-        {% endif %}
-     {% endif %}
+     <hr>
+
+     {# Seção do Chat de Dúvidas com a IA #}
+     <h2>Chat de Dúvidas com a IA</h2>
+     <div class="chat-container">
+         {# Exibição do histórico do chat #}
+         {% if chat_messages %}
+             <div class="chat-history">
+                 {% for message in chat_messages %}
+                     <div class="chat-message">
+                         {% if message.user %}
+                             <strong>Você:</strong> {{ message.user }}
+                         {% else %}
+                             <strong>IA:</strong> {{ message.bot }}
+                         {% endif %}
+                     </div>
+                 {% endfor %}
+             </div>
+         {% endif %}
+
+         {# Formulário para enviar mensagens ao chat #}
+         <form method="post">
+             {% csrf_token %}
+             {{ chat_form.as_p }}
+             <button type="submit" name="enviar_mensagem_chat">Enviar Pergunta</button>
+         </form>
+
+         {# Exibição de erro no chat com a IA, se existir #}
+         {% if erro_chat_ia %}
+             <div class="erro">
+                 <p>{{ erro_chat_ia }}</p>
+             </div>
+         {% endif %}
+     </div>
 
      {% if form and form.errors %}
         <h2>Erros no Formulário:</h2>
@@ -56,4 +81,5 @@
     <p><a href="{% url 'pagina_inicial' %}">Voltar ao Formulário</a></p>
 </body>
 </html>
+
 

@@ -8,9 +8,9 @@ urlpatterns = [
     path('exibir_cronograma',
          views.exibir_cronograma,
          name='exibir_cronograma'),
-         path('index',
+     path('index',
          views.index,
-         name='index'),
+         name='index'),        
 ]
 
 
